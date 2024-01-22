@@ -10,7 +10,7 @@ timeElement.innerText = time;
 highscoreElement.innerText = highscore;
 
 const encodedTime = encodeURIComponent(btoa(time));
-const link = `https://neving.github.io/Quick-Follow-The-Instructions/shareGame?t=${encodedTime}`;
+const link = `https://www.nevin.fun/follow-the-instructions/shareGame?t=${encodedTime}`;
 shareLink.innerText = link;
 shareLink.href = link;
 
