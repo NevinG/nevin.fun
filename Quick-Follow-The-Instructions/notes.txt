@@ -1,0 +1,2 @@
+*Current Design is designed to only work with rectangles, maybe will expand from here
+*Coordinates for the screen are based on the pixels with (0,0) being the top left

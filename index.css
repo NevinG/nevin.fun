@@ -1,0 +1,35 @@
+body{
+    background-color: pink;
+}
+
+#title{
+    text-align: center;
+    font-weight: bolder;
+    font-family: monospace;
+}
+
+#game-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap:20px;
+}
+
+.game{
+    border: 1px solid black;
+    height: 200px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+@media only screen and (max-width: 1200px){
+    #game-container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    #game-container{
+        grid-template-columns: 1fr;
+    }
+}

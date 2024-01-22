@@ -1,0 +1,17 @@
+html{
+    overscroll-behavior: none;
+    overflow: hidden;
+}
+canvas{
+    width: 100%;
+    /* TODO: find a better dynamic sizing solution */
+    height: calc(100% - 100px);
+}
+@media only screen and (max-width: 600px) {
+    h1{
+        font-size: 4rem;
+    }
+    h4{
+        font-size: 2rem;
+    }
+}

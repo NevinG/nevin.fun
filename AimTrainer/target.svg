@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg1923"
+   sodipodi:docname="Target_red_dot1.svg"
+   viewBox="0 0 145.27147 145.27594"
+   sodipodi:version="0.32"
+   version="1.0"
+   inkscape:version="0.91 r13725"
+   width="145.27147"
+   height="145.27594">
+  <defs
+     id="defs15" />
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="5"
+     height="41mm"
+     borderopacity="1.0"
+     inkscape:current-layer="svg1923"
+     inkscape:cx="73.418673"
+     inkscape:cy="72.928648"
+     showgrid="false"
+     width="41mm"
+     grid_units="mm"
+     units="mm"
+     inkscape:document-units="mm"
+     bordercolor="#666666"
+     inkscape:window-x="0"
+     guidetolerance="10.0"
+     objecttolerance="10.0"
+     inkscape:window-y="0"
+     inkscape:window-width="1280"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     pagecolor="#ffffff"
+     gridtolerance="10.0"
+     showguides="false"
+     inkscape:window-height="960"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       id="GridFromPre046Settings"
+       type="xygrid"
+       originx="0.04244986"
+       originy="-0.0042783991"
+       spacingx="0.05mm"
+       spacingy="0.05mm"
+       color="#3f3fff"
+       empcolor="#3f3fff"
+       opacity="0.15"
+       empopacity="0.38"
+       empspacing="5" />
+  </sodipodi:namedview>
+  <ellipse
+     id="path2835"
+     cx="72.635735"
+     cy="72.63797"
+     rx="72.635735"
+     ry="72.63797" />
+  <ellipse
+     id="path2833"
+     style="fill:#ffffff"
+     transform="scale(-1,-1)"
+     cx="-72.685402"
+     cy="-72.63942"
+     rx="59.349705"
+     ry="59.35104" />
+  <ellipse
+     id="path2827"
+     cx="72.665909"
+     cy="72.292976"
+     rx="48.700939"
+     ry="49.064899" />
+  <ellipse
+     id="path2831"
+     style="fill:#ffffff"
+     cx="72.681038"
+     cy="72.63855"
+     rx="35.433197"
+     ry="35.433224" />
+  <ellipse
+     id="path2825"
+     cx="72.687057"
+     cy="72.63678"
+     rx="27.460855"
+     ry="27.460503" />
+  <rect
+     id="rect6423"
+     style="fill:#000000"
+     height="5.3150001"
+     width="131.99001"
+     y="69.980225"
+     x="8.4578495" />
+  <rect
+     id="rect7310"
+     style="fill:#000000"
+     transform="matrix(0,-1,1,0,0,0)"
+     height="5.3150001"
+     width="131.99001"
+     y="70.022453"
+     x="-136.86021" />
+  <ellipse
+     id="path2829"
+     style="fill:#ffffff"
+     cx="72.680359"
+     cy="72.638115"
+     rx="14.173311"
+     ry="14.173189" />
+  <ellipse
+     id="path1934"
+     style="fill:#ff0000;fill-rule:evenodd"
+     cx="72.683853"
+     cy="72.638611"
+     rx="11.515763"
+     ry="11.515881" />
+  <metadata
+     id="metadata13">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title></dc:title>
+        <dc:date>2007-02-16T12:18:27</dc:date>
+        <dc:description />
+        <dc:source>https://openclipart.org/detail/3255/zielscheibe-target-aim-by-urwald</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>urwald</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

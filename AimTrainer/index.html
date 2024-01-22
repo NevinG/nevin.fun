@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css"/>
+        <script src="index.js" defer></script>
+    </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T5NGKXVYS3"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-T5NGKXVYS3');
+    </script>
+    <body>
+        <h1>Aim Trainer</h1>
+        <h4 id="timer">0.00</h4>
+        <div style="display: flex; justify-content: center;">
+            <label>Number of targets:</label>
+            <input id="targetNumInput" type="number" min="1" step="1" value="30"/>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <label>Target size: </label>
+            <input id="targetSizeInput" type="number" min="1" step="1" value="25"/>
+            <span>px</span>
+        </div>
+        <div id="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css"/>
+        <!-- physics engine script -->
+        <script src="matter.min.js"></script>
+        <script defer src="index.js"></script>
+    </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KNXB6N7BXM"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-KNXB6N7BXM');
+    </script>
+    <body>
+        <div id="title" class="no" style="display: flex; justify-content: center; flex-wrap: wrap;">
+            <div class="no">
+                <span class="title">Q</span>
+                <span class="title">U</span>
+                <span class="title">I</span>
+                <span class="title">C</span>
+                <span class="title">K</span>
+                <span class="title">!</span>
+            </div>
+            <span class="title">&nbsp;</span>
+            <div class="no height-locked">
+                <span class="title">F</span>
+                <span class="title">O</span>
+                <span class="title" id="instruction-8-letter">L</span>
+                <label class="switch no" id="light-switch" style="display:none">
+                    <input type="checkbox" class="no" onchange="flipLightSwitch()">
+                    <span class="slider round no"></span>
+                </label>
+                <span class="title">L</span>
+                <span class="title">O</span>
+                <span class="title">W</span>
+            </div>
+            <span class="title">&nbsp;</span>
+            <div class="no">
+                <span class="title">T</span>
+                <span class="title">H</span>
+                <span class="title" id="instruction-15-letter">E</span>
+            </div>
+            <span class="title">&nbsp;</span>
+            <div class="no">
+                <span class="title">I</span>
+                <span class="title">N</span>
+                <span class="title">S</span>
+                <span class="title">T</span>
+                <span class="title">R</span>
+                <span class="title">U</span>
+                <span class="title">C</span>
+                <span class="title">T</span>
+                <span class="title">I</span>
+                <span class="title">O</span>
+                <span class="title">N</span>
+                <span class="title">S</span>
+            </div>            
+        </div>
+
+        <div class="no" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <label id="timer">Time: 0s</label>
+            <label id="instructions-complete">Instructions Complete: 1/20</label>
+            <br>
+            <label id="instruction-1"><span class="no hide">1. </span>Click every vowel in the title.</label>
+            <label id="instruction-2"><span class="no hide">2. </span> Click on instructions 3, 8, and 10.</label>
+            <div class="no"><label id="instruction-3"><span class="no hide">3. </span> Type the third word in instruction 8: </label><input id="instruction-3-input" class="hide" placeholder="Do 4. before typing" type="text"/></div>
+            <div class="no"><label id="instruction-4"><span class="no hide">4. </span> How many inches are in foot: </label><input class="hide" id="instruction-4-input" style="width: 4em" placeholder="0" type="number"/></div>
+            <div class="no">
+                <label id="instruction-5"><span class="no hide">5. </span> Make this equation true: </label>
+                <input class="hide" id="instruction-5-input-1" style="width: 4em" value=9 type="number"/>
+                <label>+</label>
+                <input class="hide" id="instruction-5-input-2" style="width: 4em" value=3 type="number"/>
+                <label>=</label>
+                <input class="hide" id="instruction-5-input-3" style="width: 4em" value=67 type="number"/>
+            </div>
+            <label id="instruction-6"><span class="no hide">6. </span> Click on instructions 1, 2, 4, 5, and 18</label>
+            <label id="instruction-7"><span class="no hide">7. </span> Make the second number in 5. "17"</label>
+            <label id="instruction-8"><span class="no hide">8. </span> Click the first "L" in "Follow"</label>
+            <div id="instruction-9" class="no" style="display: flex; justify-content: center;">
+                <label id="instruction-9-number"><span class="no hide">9.</span>&nbsp;</label>
+                <label class="instruction-9">Click&nbsp;</label>
+                <label class="instruction-9">on&nbsp;</label>
+                <label class="instruction-9">every&nbsp;</label>
+                <label class="instruction-9">word&nbsp;</label>
+                <label class="instruction-9">in&nbsp;</label>
+                <label class="instruction-9">this&nbsp;</label>
+                <label class="instruction-9">instruction</label>
+            </div>
+
+            <div class="no"><label id="instruction-10"><span class="no hide">10. </span> What was the fourth word in instruction 9. </label><input class="hide" id="instruction-10-input" type="text"/></div>
+            <div class="no"><label id="instruction-11"><span class="no hide">11. </span> Copy and paste some of instruction 3 here: </label><input class="hide" type="text" id="instruction-11-input"/></div>
+            <label id="instruction-12"><span class="no hide">12. </span> Turn the lights off</label>
+            <div class="no"><label id="instruction-13"><span class="no hide">13. </span> Click the buttons left to right </label><button class="hide" id="instruction-13-button-1">1</button><button class="hide" id="instruction-13-button-4">4</button><button class="hide" id="instruction-13-button-2">2</button><button class="hide" id="instruction-13-button-3">3</button></div>
+            <label id="instruction-14"><span class="no hide">14. </span> Click the buttons in order</label>
+            <label id="instruction-15"><span class="no hide">15. </span> Click the "E" in the title 5 times</label>
+            <label id="instruction-16">nehtCmuci .0tr ik6 si tcoin11tisl s</label>
+            <div class="no"><label id="instruction-17"><span class="no hide">17. </span> Type the third word of instruction 18. backwards </label><input class="hide" type="text" id="instruction-17-input"/></div>
+            <label id="instruction-18" class="reverse"><span class="no">18. </span> Turn the lights off and on 10 times</label>
+            <div class="no"><label id="instruction-19"><span class="no hide" style="color:green; font-weight: bold;">19. </span><span class="no hide">Click the button 0 times </span></label><button class="hide" id="instruction-19-button">CLICK ME</button></div>
+            <label id="instruction-20"><span class="no hide">20. </span> Make all inputs uppercase</label>
+
+        </div>
+
+    </body>
+</html>
