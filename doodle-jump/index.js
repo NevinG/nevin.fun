@@ -195,7 +195,7 @@ function update(delta){
     //kill player on fallthrough ground
     if(player.y < cameraY - 100){
         player.x = 50;
-        player.y = 100;
+        player.y = cameraY;
         player.velY = 0;
         player.velX = 0;
     }
@@ -235,6 +235,14 @@ function draw(){
     //draw the player
     ctx.fillStyle = "red";
     ctx.fillRect((player.x - player.width / 2 + 50 - cameraX) / 100 * width, height - (player.y + player.height / 2 + 100 - cameraY) / 200 * height, player.width / 100 * width, player.height / 200 * height);
+
+    //draw the score
+    ctx.fillStyle = "black"
+    ctx.font = "bold 48px monospace"
+    let text = (parseInt(cameraY) / 100).toFixed(1);
+    let textWidth = 26.39 * text.length;
+    let textHeight = 56;
+    ctx.fillText(text, (width - textWidth) / 2, textHeight, width);
 }
 
 function getGradientBackground(){
