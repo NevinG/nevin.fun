@@ -322,7 +322,7 @@ function killPlayer() {
     highscoreDistance.innerText = hs.distance;
     highscoreTime.innerText = hs.time;
 
-    const link = `https://nevin.fun/platform-jump/sharegame?hs=${encodeURIComponent(btoa(JSON.stringify(hs)))}`;
+    const link = `https://nevin.fun/platform-jump/share-game?hs=${encodeURIComponent(btoa(JSON.stringify(hs)))}`;
     copyLinkButton.onclick = () => {
         navigator.clipboard.writeText(link);
         copyLinkButton.innerText = "Copied";
