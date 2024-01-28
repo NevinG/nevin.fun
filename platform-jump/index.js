@@ -1,5 +1,12 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const killScreen = document.getElementById("kill-screen");
+const scoreDistanceDisplay = document.getElementById("score-distance-display");
+const scoreTimeDisplay = document.getElementById("score-time-display");
+const shareLink = document.getElementById("share-link");
+const copyLinkButton = document.getElementById("copy-link-button");
+const playAgainButton = document.getElementById("play-again-button");
+
 
 let width = Math.min(window.innerWidth, window.innerHeight / 2);
 let height = width * 2;
@@ -16,6 +23,8 @@ let obstacleSections = [0];
 let sectionChanges = [100]; //indicies where we should change the background;
 let backgroundColors = [[255, 255, 255]]; //the colors for the background
 let floorHeight = 0;
+
+let alive = true; //when equal to false it stops the game loop
 
 //FOR CORDINATES AND OBSTACLES GAME IS 100 by 200
 const player = {
@@ -57,7 +66,8 @@ function gameLoop(timestamp) {
     draw();
 
     lastRender = timestamp;
-    window.requestAnimationFrame(gameLoop);
+    if(alive)
+        window.requestAnimationFrame(gameLoop);
 }
 window.requestAnimationFrame(gameLoop); //starts the game loop
 
@@ -266,10 +276,26 @@ function draw() {
 }
 
 function killPlayer() {
-    player.x = 50;
-    player.y = cameraY;
-    player.velY = 0;
-    player.velX = 0;
+    // player.x = 50;
+    // player.y = cameraY;
+    // player.velY = 0;
+    // player.velX = 0;
+    killScreen.style.display = "flex";
+    alive = false;
+
+    //populate the killscreen
+    scoreDistanceDisplay.innerText = (parseInt(cameraY) / 100).toFixed(1);
+    // scoreTimeDisplay.innerText = timervalue
+    const link = "https://nevin.fun/platform-jump";
+    shareLink.href = link;
+    shareLink.innerText = link;
+    copyLinkButton.onclick = () => {
+        navigator.clipboard.writeText(link);
+        copyLink.innerText = "Copied";
+    };
+    playAgainButton.onclick = () => {
+        location.reload();
+    }
 }
 
 function getGradientBackground() {
