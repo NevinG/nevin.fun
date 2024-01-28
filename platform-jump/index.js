@@ -3,9 +3,10 @@ const ctx = canvas.getContext("2d");
 const killScreen = document.getElementById("kill-screen");
 const scoreDistanceDisplay = document.getElementById("score-distance-display");
 const scoreTimeDisplay = document.getElementById("score-time-display");
-const shareLink = document.getElementById("share-link");
 const copyLinkButton = document.getElementById("copy-link-button");
 const playAgainButton = document.getElementById("play-again-button");
+const highscoreDistance = document.getElementById("highscore-distance");
+const highscoreTime = document.getElementById("highscore-time");
 
 
 let width = Math.min(window.innerWidth, window.innerHeight / 2);
@@ -24,6 +25,7 @@ let sectionChanges = [100]; //indicies where we should change the background;
 let backgroundColors = [[255, 255, 255]]; //the colors for the background
 let floorHeight = 0;
 
+let timer = 0;
 let alive = true; //when equal to false it stops the game loop
 
 //FOR CORDINATES AND OBSTACLES GAME IS 100 by 200
@@ -82,6 +84,8 @@ const gravity = -80;
 const bounceForce = 100;
 const movementSpeed = 80;
 function update(delta) {
+    timer += delta;
+
     //move with arrow key
     if (left) {
         player.velX = -movementSpeed;
@@ -269,29 +273,59 @@ function draw() {
     //draw the score
     ctx.fillStyle = "black"
     ctx.font = "bold 48px monospace"
-    let text = (parseInt(cameraY) / 100).toFixed(1);
+    let text = (parseInt(cameraY) / 100).toFixed(1) + "m";
     let textWidth = 26.39 * text.length;
     let textHeight = 56;
     ctx.fillText(text, (width - textWidth) / 2, textHeight, width);
 }
 
 function killPlayer() {
-    // player.x = 50;
-    // player.y = cameraY;
-    // player.velY = 0;
-    // player.velX = 0;
     killScreen.style.display = "flex";
     alive = false;
 
+    //get highscore
+    let hs = localStorage.getItem("hs");
+    if(hs){
+        hs = JSON.parse(hs);
+        if(hs.date != (new Date()).toISOString().substring(0,10)){
+            hs = {
+                "distance": 0,
+                "time": 0,
+                "date": (new Date()).toISOString().substring(0,10),
+                };
+        }
+    }
+    else
+        hs = {
+            "distance": 0,
+            "time": 0,
+            "date": (new Date()).toISOString().substring(0,10),
+            };
+    
+    //update highscore
+    if(parseFloat((parseInt(cameraY) / 100).toFixed(1)) > parseFloat(hs.distance)){
+        hs.distance = parseFloat((parseInt(cameraY) / 100).toFixed(1));
+        hs.time = parseFloat(timer.toFixed(1));
+    }
+    else if(parseFloat((parseInt(cameraY) / 100).toFixed(1)) == parseFloat(hs.distance)){
+        if(timer < parseFloat(hs.time)){
+            hs.time = parseFloat(timer.toFixed(1));
+        }
+    }
+    //save highscore
+    localStorage.setItem("hs", JSON.stringify(hs));
+
+
     //populate the killscreen
     scoreDistanceDisplay.innerText = (parseInt(cameraY) / 100).toFixed(1);
-    // scoreTimeDisplay.innerText = timervalue
-    const link = "https://nevin.fun/platform-jump";
-    shareLink.href = link;
-    shareLink.innerText = link;
+    scoreTimeDisplay.innerText = timer.toFixed(1);
+    highscoreDistance.innerText = hs.distance;
+    highscoreTime.innerText = hs.time;
+
+    const link = `https://nevin.fun/platform-jump/sharegame?hs=${encodeURIComponent(btoa(JSON.stringify(hs)))}`;
     copyLinkButton.onclick = () => {
         navigator.clipboard.writeText(link);
-        copyLink.innerText = "Copied";
+        copyLinkButton.innerText = "Copied";
     };
     playAgainButton.onclick = () => {
         location.reload();
