@@ -28,6 +28,11 @@ let floorHeight = 0;
 let timer = 0;
 let alive = true; //when equal to false it stops the game loop
 
+//use pseudo random number generator that can be seeded
+//got this from: https://github.com/davidbau/seedrandom
+const seed = (new Date()).toISOString().substring(0,10);
+Math.random = new Math.seedrandom(seed);
+
 //FOR CORDINATES AND OBSTACLES GAME IS 100 by 200
 const player = {
     x: 50,
