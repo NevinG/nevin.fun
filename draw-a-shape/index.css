@@ -10,10 +10,11 @@
     top: 0;
 }
 
-html{
-    overscroll-behavior: none;
+html, body{
     overflow: hidden;
+    overscroll-behavior: none;
 }
+
 canvas{
     width: 100%;
     /* TODO: find a better dynamic sizing solution */

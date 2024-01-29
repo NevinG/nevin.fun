@@ -15,6 +15,7 @@ canvas.style.width = width;
 canvas.style.height = height;
 canvas.width = width;
 canvas.height = height;
+
 let left = false;
 let right = false;
 
@@ -27,6 +28,9 @@ let floorHeight = 0;
 
 let timer = 0;
 let alive = true; //when equal to false it stops the game loop
+let mousedown = false;
+let mouseXChange = 0;
+let mouseXPos = 0;
 
 //use pseudo random number generator that can be seeded
 //got this from: https://github.com/davidbau/seedrandom
@@ -53,7 +57,7 @@ document.addEventListener("keydown", (event) => {
     else if (event.code == "ArrowLeft" || event.code == "KeyA") {
         left = true;
     }
-})
+});
 
 document.addEventListener("keyup", (event) => {
     if (event.code == "ArrowRight" || event.code == "KeyD") {
@@ -62,7 +66,38 @@ document.addEventListener("keyup", (event) => {
     else if (event.code == "ArrowLeft" || event.code == "KeyA") {
         left = false;
     }
-})
+});
+
+document.addEventListener("mousedown", (event) => {
+    mousedown = true;
+    mouseXPos = event.clientX;
+    mouseXChange = 0;
+});
+document.addEventListener("touchstart", (event) => {
+    mousedown = true;
+    mouseXPos = event.touches[0].clientX;
+    mouseXChange = 0;
+});
+document.addEventListener("mouseup", (event) => {
+    mousedown = false;
+    mouseXChange = 0;
+});
+document.addEventListener("touchend", (event) => {
+    mousedown = false;
+    mouseXChange = 0;
+});
+document.addEventListener("mousemove", (event) => {
+    if(mousedown){
+        mouseXChange += (event.clientX - mouseXPos) / width * 100;
+        mouseXPos = event.clientX;
+    }
+});
+document.addEventListener("touchmove", (event) => {
+    if(mousedown){
+        mouseXChange += (event.touches[0].clientX - mouseXPos) / width * 100;
+        mouseXPos = event.touches[0].clientX;
+    }
+});
 
 //this is the physics.game loop
 let lastRender = 0
@@ -91,15 +126,23 @@ const movementSpeed = 80;
 function update(delta) {
     timer += delta;
 
-    //move with arrow key
-    if (left) {
-        player.velX = -movementSpeed;
-    }
-    if (right) {
-        player.velX = movementSpeed;
-    }
-    if (!left && !right) {
+    //move with mouse/finger
+    if(mousedown){
         player.velX = 0;
+        player.x += mouseXChange;
+        mouseXChange = 0;
+    }
+    else{
+        //move with arrow key
+        if (left) {
+            player.velX = -movementSpeed;
+        }
+        if (right) {
+            player.velX = movementSpeed;
+        }
+        if (!left && !right) {
+            player.velX = 0;
+        }
     }
 
     //gravity on player
@@ -277,10 +320,12 @@ function draw() {
 
     //draw the score
     ctx.fillStyle = "black"
+    ctx.strokeStyle = getGradientBackground();
     ctx.font = "bold 48px monospace"
     let text = (parseInt(cameraY) / 100).toFixed(1) + "m";
     let textWidth = 26.39 * text.length;
     let textHeight = 56;
+    ctx.strokeText(text, (width - textWidth) / 2, textHeight, width);
     ctx.fillText(text, (width - textWidth) / 2, textHeight, width);
 }
 
@@ -344,6 +389,26 @@ function getGradientBackground() {
                 ${backgroundColors[0][2] + gradPercent * (backgroundColors[1][2] - backgroundColors[0][2])}`;
 }
 
+function getRandomBackgroundColor(){
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    let bannedColors = [[255, 255, 255], [0,0,0], [255,0,0], [0,255,255], [0,0,255], [128,128,128], [169,169,169]];
+    let difference;
+    for(color in backgroundColors){
+        difference = 0;
+        difference += Math.abs(color[0] - r);
+        difference += Math.abs(color[1] - g);
+        difference += Math.abs(color[2] - b);
+
+        //if background color is too similar to one on screen get new one
+        if(difference < 100){
+            return getRandomBackgroundColor();
+        }
+    }
+    return [r,g,b];
+}
+
 function generateSection(sectionNum) {
     let oldObstacleAmount = obstacles.length;
     switch (sectionNum) {
@@ -381,7 +446,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([45, 49, 92])
+            backgroundColors.push(getRandomBackgroundColor())
             break;
         case 2:
             //ADD SOME TOUCH OBSTACLES
@@ -413,7 +478,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([222, 73, 200])
+            backgroundColors.push(getRandomBackgroundColor());
             break;
         case 3:
             //ADD SOME BREAKING FLOORS
@@ -439,7 +504,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([10, 73, 200]);
+            backgroundColors.push(getRandomBackgroundColor());
             break;
         case 4:
             //ADD SOME TOUCH OBSTACLES && BREAKING FLOORS
@@ -474,7 +539,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([222, 40, 10])
+            backgroundColors.push(getRandomBackgroundColor());
             break;
         case 5:
             //ADD SOME TOUCH OBSTACLES
@@ -512,7 +577,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([10, 200, 200])
+            backgroundColors.push(getRandomBackgroundColor());
             break;
         case 6:
             //ADD SOME TOUCH, BREAK, SHOOT OBSTACLES
@@ -562,7 +627,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([150, 10, 150])
+            backgroundColors.push(getRandomBackgroundColor());
             break;
         case 7:
             //SPECIAL FLOORS SHOT FROM SHOOTER
@@ -603,7 +668,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([30, 180, 200]);
+            backgroundColors.push(getRandomBackgroundColor());
             break;
         default:
             //generate a completely random section
@@ -668,7 +733,7 @@ function generateSection(sectionNum) {
             //change background color and add section
             obstacleSections.push(obstacles.length - oldObstacleAmount);
             sectionChanges.push(floorHeight);
-            backgroundColors.push([255, 10, 150]);
+            backgroundColors.push(getRandomBackgroundColor());
             break;
     }
 }

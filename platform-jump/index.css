@@ -6,8 +6,14 @@
     font-size: 2em;
     text-decoration: none;
     position: fixed;
-    left: 5px;
+    left: 5pt;
     top: 0;
+    z-index: 2;
+}
+
+html, body{
+    overflow: hidden;
+    overscroll-behavior: none;
 }
 
 html{
@@ -17,16 +23,20 @@ html{
 }
 
 body{
+    position: relative;
     height: 100%;
     width: 100%;
     margin:0;
-    overflow: hidden;
 }
 
 canvas{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     display: block;
     border: 1px solid black;
-    margin: auto
 }
 
 #kill-screen{
@@ -42,17 +52,32 @@ canvas{
 
 #kill-screen-popup{
     max-width: 98%;
-    min-width: 50%;
-    width: 500px;
+    min-width: 25%;
+    width: 700pt;
 
     /* height: 1000px;
     max-height: 80%;
     min-height: 50%; */
-    padding-bottom: 50px;
+    padding-bottom: 50pt;
 
     background-color: rgb(255, 255, 255);
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 10pt;
 
     text-align: center;
 }
+
+@media only screen and (max-width: 800pt) {
+    h1{
+        font-size: 4em;
+    }
+    p{
+        font-size: 3em;
+    }
+    button{
+        font-size: 32pt;
+    }
+    #return-to-home{
+        font-size: 4em;
+    }
+  }
