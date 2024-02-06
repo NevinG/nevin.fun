@@ -647,10 +647,10 @@ function updateInstructionCount(i, beep = true){
     if(instructionsComplete == 20){
         gameOver = true;
         const encodedTime = encodeURIComponent(btoa(timeElapsed.toFixed(1)));
-        let highscoreTime = JSON.parse(localStorage.getItem("highscore"));
+        let highscoreTime = JSON.parse(localStorage.getItem("follow-the-instructions-highscore"));
         if(highscoreTime == null || timeElapsed < parseFloat(highscoreTime)){
             highscoreTime = timeElapsed.toFixed(1);
-            localStorage.setItem("highscore", JSON.stringify(highscoreTime));
+            localStorage.setItem("follow-the-instructions-highscore", JSON.stringify(highscoreTime));
         }
         const encodedHighscore = encodeURIComponent(btoa(highscoreTime));
         window.location.href = `winner?t=${encodedTime}&h=${encodedHighscore}`;

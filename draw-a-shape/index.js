@@ -20,12 +20,12 @@ let drawing = false;
 let drawingTimeout = undefined;
 const strokeRadius = 5;
 
-if (localStorage.getItem("circle") == undefined)
-    localStorage.setItem("circle",JSON.stringify(0));
-if (localStorage.getItem("square") == undefined)
-    localStorage.setItem("square",JSON.stringify(0));
-if (localStorage.getItem("triangle") == undefined)
-    localStorage.setItem("triangle",JSON.stringify(0));
+if (localStorage.getItem("draw-a-shape-circle") == undefined)
+    localStorage.setItem("draw-a-shape-circle",JSON.stringify(0));
+if (localStorage.getItem("draw-a-shape-square") == undefined)
+    localStorage.setItem("draw-a-shape-square",JSON.stringify(0));
+if (localStorage.getItem("draw-a-shape-triangle") == undefined)
+    localStorage.setItem("draw-a-shape-triangle",JSON.stringify(0));
 
 ctx.lineWidth = strokeRadius;
 
@@ -192,10 +192,10 @@ function endDrawing(){
         if(r < 125)
             accuracyText.innerText = "Too Small";
         else{
-            localStorage.setItem("circle", JSON.stringify(Math.max(parseFloat(JSON.parse(localStorage.getItem("circle"))), circleAccuracy)));
+            localStorage.setItem("draw-a-shape-circle", JSON.stringify(Math.max(parseFloat(JSON.parse(localStorage.getItem("draw-a-shape-circle"))), circleAccuracy)));
 
             accuracyText.innerText = "Circle is " + (circleAccuracy * 100).toFixed(1) + "% accurate";
-            accuracyText.innerText += " | High Score: " + (parseFloat(JSON.parse(localStorage.getItem("circle"))) * 100).toFixed(1) + "%";
+            accuracyText.innerText += " | High Score: " + (parseFloat(JSON.parse(localStorage.getItem("draw-a-shape-circle"))) * 100).toFixed(1) + "%";
             ctx.strokeStyle = "red";
             ctx.beginPath();
             ctx.arc(middleX, middleY, r, 0, 2 * Math.PI);
@@ -206,10 +206,10 @@ function endDrawing(){
         if(width < 250)
             accuracyText.innerText = "Too Small";
         else{
-            localStorage.setItem("square", JSON.stringify(Math.max(parseFloat(JSON.parse(localStorage.getItem("square"))), squareAccuracy)));
+            localStorage.setItem("draw-a-shape-square", JSON.stringify(Math.max(parseFloat(JSON.parse(localStorage.getItem("draw-a-shape-square"))), squareAccuracy)));
 
             accuracyText.innerText = "Square is " + (squareAccuracy * 100).toFixed(1) + "% accurate";
-            accuracyText.innerText += " | High Score: " + (parseFloat(JSON.parse(localStorage.getItem("square"))) * 100).toFixed(1) + "%";
+            accuracyText.innerText += " | High Score: " + (parseFloat(JSON.parse(localStorage.getItem("draw-a-shape-square"))) * 100).toFixed(1) + "%";
             ctx.strokeStyle = "red";
             ctx.beginPath();
             ctx.strokeRect(middleX - width / 2, middleY - width / 2, width, width)
@@ -220,10 +220,10 @@ function endDrawing(){
             accuracyText.innerText = "Too Small"
         }
         else{
-            localStorage.setItem("triangle", JSON.stringify(Math.max(parseFloat(JSON.parse(localStorage.getItem("triangle"))), triangleAccuracy)));
+            localStorage.setItem("draw-a-shape-triangle", JSON.stringify(Math.max(parseFloat(JSON.parse(localStorage.getItem("draw-a-shape-triangle"))), triangleAccuracy)));
 
             accuracyText.innerText = "Triangle is " + (triangleAccuracy * 100).toFixed(1) + "% accurate";
-            accuracyText.innerText += " | High Score: " + (parseFloat(JSON.parse(localStorage.getItem("triangle"))) * 100).toFixed(1) + "%";
+            accuracyText.innerText += " | High Score: " + (parseFloat(JSON.parse(localStorage.getItem("draw-a-shape-triangle"))) * 100).toFixed(1) + "%";
             ctx.strokeStyle = "red";
             ctx.beginPath();
             ctx.moveTo(middleX - sideLength / 2, middleY + Math.sqrt(3) * sideLength / 4);

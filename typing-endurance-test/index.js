@@ -33,8 +33,8 @@ typingAreaChild.onanimationend = (e) => {
     }
 }
 
-if (localStorage.getItem("hs") == undefined)
-    localStorage.setItem("hs", JSON.stringify({}));
+if (localStorage.getItem("typing-endurance-test-hs") == undefined)
+    localStorage.setItem("typing-endurance-test-hs", JSON.stringify({}));
 
 resetTest();
 
@@ -299,14 +299,14 @@ function endTest() {
 }
 
 function getScore() {
-    const scores = JSON.parse(localStorage.getItem("hs"));
+    const scores = JSON.parse(localStorage.getItem("typing-endurance-test-hs"));
     if (scores[goalSpeed] != undefined)
         return scores[goalSpeed].toFixed(1);
     return 0;
 }
 
 function saveScore(score) {
-    const scores = JSON.parse(localStorage.getItem("hs"));
+    const scores = JSON.parse(localStorage.getItem("typing-endurance-test-hs"));
     scores[goalSpeed] = parseFloat(Math.max(score, scores[goalSpeed] ?? 0));
-    localStorage.setItem("hs", JSON.stringify(scores));
+    localStorage.setItem("typing-endurance-test-hs", JSON.stringify(scores));
 }

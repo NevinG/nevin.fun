@@ -334,7 +334,7 @@ function killPlayer() {
     alive = false;
 
     //get highscore
-    let hs = localStorage.getItem("hs");
+    let hs = localStorage.getItem("platform-jump-hs");
     if(hs){
         hs = JSON.parse(hs);
         if(hs.date != (new Date()).toISOString().substring(0,10)){
@@ -363,7 +363,7 @@ function killPlayer() {
         }
     }
     //save highscore
-    localStorage.setItem("hs", JSON.stringify(hs));
+    localStorage.setItem("platform-jump-hs", JSON.stringify(hs));
 
 
     //populate the killscreen
