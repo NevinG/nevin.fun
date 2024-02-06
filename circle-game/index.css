@@ -8,6 +8,8 @@
     position: fixed;
     left: 5px;
     top: 0;
+    user-select: none;
+    z-index: 3;
 }
 
 html, body{
@@ -38,4 +40,9 @@ html, body{
     text-align: center;
     padding: 25px;
     z-index: 3;
+    font-size: 2em;
+}
+
+button{
+    font-size: 1em;
 }

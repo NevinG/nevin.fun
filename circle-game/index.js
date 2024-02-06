@@ -61,7 +61,7 @@ function posTransform(x, y, obWidth, obHeight){
 let numOfObjects = 11;
 let score = 0;
 let balls = [];
-let nextBallX = 0;
+let nextBallX = width / 2;
 let ballColors = ["#800000", "#e6194B", "#f58231", "#ffe119",
                   "#3cb44b", "#42d4f4", "#fabed4", "#000075",
                   "#469990", "#f032e6", "#808000"];
@@ -87,12 +87,18 @@ for(let i = 0; i < numOfObjects; i++){
     })
 }
 
-canvas.onclick = (e) => {
+canvas.onclick = handleClick;
+canvas.ontouchend = handleClick;
+function handleClick(e){
     if(gameIsOver)
         return;
     let sizeIndex = nextBallSizes.shift();
     nextBallSizes.push(Math.floor(Math.random() * 5));
     createBall(sizeIndex,nextBallX, canvas.height - height - 30);
+}
+canvas.ontouchmove = (e)=>{
+    nextBallX = Math.min(e.touches[0].clientX, width + (canvas.width - width) / 2 - .05 *width);
+    nextBallX = Math.max(nextBallX, (canvas.width - width) / 2 + .05 * width);
 }
 document.onmousemove = (e) =>{
     nextBallX = Math.min(e.clientX, width + (canvas.width - width) / 2 - .05 *width);
@@ -127,6 +133,8 @@ function createBall(sizeIndex, x, y){
     if(gameIsOver)
         return;
     score += sizeIndex + 1;
+    if(sizeIndex >= numOfObjects)
+        return;
     let radius = (width*.65) * Math.pow(.8164, (numOfObjects - 1) - sizeIndex + 1) / 2;
     let ball = Bodies.circle(x, y, radius);
     ball.sizeIndex = sizeIndex;

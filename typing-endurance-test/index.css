@@ -8,6 +8,8 @@
     position: fixed;
     left: 5px;
     top: 0;
+    user-select: none;
+    z-index: 3;
 }
 
 body{

@@ -13,7 +13,9 @@ body{
     text-decoration: none;
     position: fixed;
     left: 5px;
+    z-index: 3;
     top: 0;
+    user-select: none;
 }
 
 input{
