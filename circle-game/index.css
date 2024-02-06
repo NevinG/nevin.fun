@@ -48,3 +48,9 @@ html, body{
 button{
     font-size: 1em;
 }
+
+@media only screen and (max-width: 800pt) {
+    #return-to-home{
+        font-size: 4em;
+    }
+}

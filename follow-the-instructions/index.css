@@ -108,3 +108,9 @@ input:checked+.slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+@media only screen and (max-width: 800pt) {
+    #return-to-home{
+        font-size: 4em;
+    }
+}
