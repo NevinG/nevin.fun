@@ -1,5 +1,8 @@
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
+const popup = document.getElementById("popup");
+const scoreElement = document.getElementById("score");
+const hsElement = document.getElementById("hs");
 
 // module aliases
 var Engine = Matter.Engine,
@@ -18,6 +21,7 @@ const width = Math.min(canvas.width - 100, canvas.height - 100);
 const height = width;
 
 let gameObjects = [];
+let gameIsOver = false;
 // create ground and walls
 let [obX, obY, obWidth, obHeight] = posTransform(.5, .0125, 1, .1);
 let body = Bodies.rectangle(obX, obY, obWidth, obHeight, { isStatic: true });
@@ -58,9 +62,9 @@ let numOfObjects = 11;
 let score = 0;
 let balls = [];
 let nextBallX = 0;
-let ballColors = ["red", "orange", "yellow", "green",
-                  "blue", "purple", "indigo", "violet",
-                  "pink", "limegreen", "beige", "darkgreen"];
+let ballColors = ["#800000", "#e6194B", "#f58231", "#ffe119",
+                  "#3cb44b", "#42d4f4", "#fabed4", "#000075",
+                  "#469990", "#f032e6", "#808000"];
 let nextBallSizes = [];
 for(let i = 0; i < 5; i++){
     nextBallSizes.push(Math.floor(Math.random() * 5));
@@ -74,6 +78,8 @@ for(let i = 0; i < 5; i++){
     })
 }
 let ballEvolution = [];
+let ballEvolutionRadius = Math.min((height / numOfObjects / 2), (canvas.width - width) / 4);
+let nextBallsRadius = Math.min((height / 5 / 2), (canvas.width - width) / 4);
 for(let i = 0; i < numOfObjects; i++){
     ballEvolution.push({
         x: (canvas.width - width) / 2,
@@ -82,6 +88,8 @@ for(let i = 0; i < numOfObjects; i++){
 }
 
 canvas.onclick = (e) => {
+    if(gameIsOver)
+        return;
     let sizeIndex = nextBallSizes.shift();
     nextBallSizes.push(Math.floor(Math.random() * 5));
     createBall(sizeIndex,nextBallX, canvas.height - height - 30);
@@ -116,6 +124,8 @@ Events.on(engine, "collisionStart", (e) => {
 })
 
 function createBall(sizeIndex, x, y){
+    if(gameIsOver)
+        return;
     score += sizeIndex + 1;
     let radius = (width*.65) * Math.pow(.8164, (numOfObjects - 1) - sizeIndex + 1) / 2;
     let ball = Bodies.circle(x, y, radius);
@@ -130,12 +140,6 @@ function render() {
     //clear screen
     context.clearRect(0,0,canvas.width, canvas.height);
 
-    //score
-    context.fillStyle = "black";
-    context.font = "50px monospace";
-    let title = `Score:${score}`;
-    context.fillText(title, (canvas.width / 2) - (27.5 * title.length) / 2,40);
-
     //other
     for(let i = 0; i < gameObjects.length; i++){
         context.fillStyle = "black";
@@ -148,11 +152,9 @@ function render() {
         //check for game over
         if(balls[i].position.x < (canvas.width - width) / 2){
             gameOver();
-            return;
         }
         if(balls[i].position.x > width + (canvas.width - width) / 2){
             gameOver();
-            return;
         }
         context.fillStyle = ballColors[balls[i].sizeIndex];
         context.beginPath();
@@ -167,9 +169,9 @@ function render() {
     for(let i = 0; i < nextBalls.length; i++){
         context.fillStyle = ballColors[nextBallSizes[i]];
         context.beginPath();
-        context.arc(nextBalls[i].x + 40,
-                    canvas.height - nextBalls[i].y + 40,
-                    20,
+        context.arc(nextBalls[i].x + Math.min(nextBallsRadius, (width*.65) * Math.pow(.8164, (numOfObjects - 1) - nextBallSizes[i] + 1) / 2),
+                    canvas.height - nextBalls[i].y + 50,
+                    Math.min(nextBallsRadius, (width*.65) * Math.pow(.8164, (numOfObjects - 1) - nextBallSizes[i] + 1) / 2),
                     0, 
                     Math.PI * 2);
         context.fill();
@@ -178,9 +180,9 @@ function render() {
     for(let i = 0; i < ballEvolution.length; i++){
         context.fillStyle = ballColors[i];
         context.beginPath();
-        context.arc(ballEvolution[i].x - 40,
-                    canvas.height - ballEvolution[i].y - 20,
-                    10,
+        context.arc(ballEvolution[i].x - ballEvolutionRadius,
+                    canvas.height - ballEvolution[i].y - ballEvolutionRadius,
+                    Math.min(ballEvolutionRadius, (width*.65) * Math.pow(.8164, (numOfObjects - 1) - i + 1) / 2),
                     0, 
                     Math.PI * 2);
         context.fill();
@@ -195,11 +197,36 @@ function render() {
                 Math.PI * 2);
         context.fill();
         context.closePath();
+
+    //score
+    context.fillStyle = "black";
+    context.font = "50px monospace";
+    let title = `Score:${score}`;
+    context.fillText(title, (canvas.width / 2) - (27.5 * title.length) / 2,40);
+
     window.requestAnimationFrame(render);
 }
 window.requestAnimationFrame(render); //starts the game loop
 
 function gameOver(){
+    gameIsOver = true;
+    //add popup to middle of screen
+    popup.style.display = "block";
+    popup.style.maxWidth = width;
+
+    //get high score
+    let hs = localStorage.getItem("circle-game-hs") != null ? parseInt(JSON.parse(localStorage.getItem("circle-game-hs"))) : 0;
+    hs = Math.max(score, hs);
+    //save high score
+    localStorage.setItem("circle-game-hs", JSON.stringify(hs));
+
+    //update the popup
+    scoreElement.innerText = score;
+    hsElement.innerText = hs;
+    
+}
+
+function reload(){
     location.reload();
 }
 
