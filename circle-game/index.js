@@ -66,15 +66,15 @@ let ballColors = ["#800000", "#e6194B", "#f58231", "#ffe119",
                   "#3cb44b", "#42d4f4", "#fabed4", "#000075",
                   "#469990", "#f032e6", "#808000"];
 let nextBallSizes = [];
-for(let i = 0; i < 5; i++){
-    nextBallSizes.push(Math.floor(Math.random() * 5));
+for(let i = 0; i < 6; i++){
+    nextBallSizes.push(Math.floor(Math.random() * 6));
 }
 //generate the nextballobjects for my renderer
 let nextBalls = [];
-for(let i = 0; i < 5; i++){
+for(let i = 0; i < 6; i++){
     nextBalls.push({
         x: (canvas.width - width) / 2  +width,
-        y: height - (i/5 * height),
+        y: height - ((i-1)/5 * height),
     })
 }
 let ballEvolution = [];
@@ -93,7 +93,7 @@ function handleClick(e){
     if(gameIsOver)
         return;
     let sizeIndex = nextBallSizes.shift();
-    nextBallSizes.push(Math.floor(Math.random() * 5));
+    nextBallSizes.push(Math.floor(Math.random() * 6));
     createBall(sizeIndex,nextBallX, canvas.height - height - 30);
 }
 canvas.ontouchmove = (e)=>{
@@ -174,7 +174,7 @@ function render() {
         context.fill();
         context.closePath();
     }
-    for(let i = 0; i < nextBalls.length; i++){
+    for(let i = 1; i < nextBalls.length; i++){
         context.fillStyle = ballColors[nextBallSizes[i]];
         context.beginPath();
         context.arc(nextBalls[i].x + Math.min(nextBallsRadius, (width*.65) * Math.pow(.8164, (numOfObjects - 1) - nextBallSizes[i] + 1) / 2),
@@ -203,8 +203,8 @@ function render() {
                 (width*.65) * Math.pow(.8164, (numOfObjects - 1) - nextBallSizes[0] + 1) / 2,
                 0, 
                 Math.PI * 2);
-        context.fill();
-        context.closePath();
+    context.fill();
+    context.closePath();
 
     //score
     context.fillStyle = "black";
