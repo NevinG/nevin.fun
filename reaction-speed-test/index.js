@@ -52,6 +52,7 @@ document.addEventListener("mousedown", (e) => {
 
 function reset(){
     testResults = []
+    clearTimeout(currentTimeout);
     currentTimeout = undefined;
     userId = undefined;
     currentSecret = undefined;
