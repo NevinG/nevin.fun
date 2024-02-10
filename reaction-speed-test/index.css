@@ -1,0 +1,59 @@
+html, body{
+    font-family: 'monospace';
+    color:white;
+    background-color: #be1f1a;
+
+    overflow: hidden;
+    overscroll-behavior: none;
+    margin: 0;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+#return-to-home{
+    font-family: monospace;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 2em;
+    text-decoration: none;
+    position: fixed;
+    left: 5px;
+    top: 0;
+    user-select: none;
+    z-index: 3;
+}
+@media only screen and (max-width: 800pt) {
+    #return-to-home{
+        font-size: 3em;
+    }
+    ol{
+        font-size: 2em;
+    }
+    h2{
+        font-size: 2em;
+    }
+}
+
+#leaderboards{
+    margin-top: 50px;
+    display: flex;
+}
+#daily-leaderboard, #all-time-leaderboard{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ol{
+    padding: 0;
+}
+
+#text{
+    font-size: 4em;
+    text-align: center;
+    height: 100%;
+    padding: 25px;
+}
