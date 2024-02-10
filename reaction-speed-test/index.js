@@ -61,7 +61,7 @@ async function getWaitime(){
         userId = await getUserId();
     }
 
-    const response = await fetch(`http://localhost:3000/click?userId=${userId}`);
+    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/click?userId=${userId}`);
     if(response.ok){
         const jsonResponse = await response.json();
         currentTimeout = setTimeout(()=>{
@@ -74,20 +74,20 @@ async function getWaitime(){
 
 }
 async function getUserId(){
-    const response = await fetch("http://localhost:3000/userId");
+    const response = await fetch("https://backend-tfl5gdluba-uc.a.run.app/userId");
     if(response.ok){
         const jsonResponse = await response.json();
         return jsonResponse["userId"];
     }
 }
 async function sendResponseTime(){
-    const response = await fetch(`http://localhost:3000/responseTime?userId=${userId}&secret=${currentSecret}&time=${testResults[testResults.length -1]}`,{
+    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/responseTime?userId=${userId}&secret=${currentSecret}&time=${testResults[testResults.length -1]}`,{
         method: "POST",
     });
 }
 
 async function getScore(){
-    const response = await fetch(`http://localhost:3000/finalScore?userId=${userId}`);
+    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/finalScore?userId=${userId}`);
     let averageTime;
     if(response.ok){
         const jsonResponse = await response.json();
@@ -105,7 +105,7 @@ async function getScore(){
 }
 
 async function getLeaderboard(){
-    const response = await fetch(`http://localhost:3000/leaderboard`);
+    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/leaderboard`);
     if(response.ok){
         const jsonResponse = await response.json();
         leaderboardData = jsonResponse["leaderboard"];
