@@ -1,4 +1,6 @@
-screenText = document.getElementById("screen-text");
+const screenText = document.getElementById("screen-text");
+const allTimeLeaderboardEntries = document.getElementById("all-time-leaderboard-entries");
+
 let waitingToStartTest = true
 let testResults = [];
 const totalNumberOfTests = 5;
@@ -10,12 +12,14 @@ const readyBackground = "#15b315";
 let currentTimeout = undefined;
 let userId = undefined;
 let currentSecret = undefined;
+let leaderboardData = [];
 
+getLeaderboard();
 document.addEventListener("mousedown", (e) => {
     if (currentTimeout)
         clearTimeout(currentTimeout)
 
-    document.body.style.backgroundColor = notReadyBackground;
+    document.documentElement.style.backgroundColor = notReadyBackground;
     if (waitingToStartTest){
         screenText.innerText = "Click the screen when the background turns green";
         started = true;
@@ -63,7 +67,7 @@ async function getWaitime(){
         currentTimeout = setTimeout(()=>{
             waitingClick = true;
             startTime = Date.now();
-            document.body.style.backgroundColor = readyBackground;
+            document.documentElement.style.backgroundColor = readyBackground;
         }, parseInt(jsonResponse["waitTime"]))
         currentSecret = jsonResponse["secret"];
     }
@@ -88,6 +92,8 @@ async function getScore(){
     if(response.ok){
         const jsonResponse = await response.json();
         averageTime = jsonResponse["finalScore"];
+        leaderboardData = jsonResponse["leaderboard"];
+        updateLeaderboard();
     }else{
         return;
     }
@@ -96,4 +102,19 @@ async function getScore(){
     screenText.innerText += `Click for a new test`;
 
     reset();
+}
+
+async function getLeaderboard(){
+    const response = await fetch(`http://localhost:3000/leaderboard`);
+    if(response.ok){
+        const jsonResponse = await response.json();
+        leaderboardData = jsonResponse["leaderboard"];
+    }else{
+        return;
+    }
+    updateLeaderboard();
+}
+
+function updateLeaderboard(){
+    allTimeLeaderboardEntries.innerHTML = leaderboardData.map((x) => `<li>${x}</li>`).join(' ');
 }

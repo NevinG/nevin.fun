@@ -1,11 +1,9 @@
 html, body{
     font-family: 'monospace';
     color:white;
+}
+html{
     background-color: #be1f1a;
-
-    overflow: hidden;
-    overscroll-behavior: none;
-    margin: 0;
 }
 body{
     display: flex;
@@ -25,17 +23,6 @@ body{
     user-select: none;
     z-index: 3;
 }
-@media only screen and (max-width: 800pt) {
-    #return-to-home{
-        font-size: 3em;
-    }
-    ol{
-        font-size: 2em;
-    }
-    h2{
-        font-size: 2em;
-    }
-}
 
 #leaderboards{
     margin-top: 50px;
@@ -47,13 +34,28 @@ body{
     flex-direction: column;
     align-items: center;
 }
-ol{
+ul{
     padding: 0;
+    list-style-type: none;
 }
 
 #text{
-    font-size: 4em;
+    font-size: 2em;
     text-align: center;
-    height: 100%;
     padding: 25px;
+}
+
+@media only screen and (max-width: 800pt) {
+    #return-to-home{
+        font-size: 3em;
+    }
+    ul{
+        font-size: 3em;
+    }
+    h2{
+        font-size: 3em;
+    }
+    #text{
+        font-size: 3em;
+    }
 }
