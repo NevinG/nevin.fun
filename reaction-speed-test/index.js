@@ -34,6 +34,7 @@ document.addEventListener("mousedown", (e) => {
         reset();
     }
     else{
+        document.documentElement.style.backgroundColor = readyBackground;
         let elapsedTime = Date.now() - startTime;
         testResults.push(elapsedTime)
         waitingToStartTest = true;
