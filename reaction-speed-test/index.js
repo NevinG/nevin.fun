@@ -76,47 +76,72 @@ async function getWaitime(){
 
 }
 async function getUserId(){
-    const response = await fetch("https://backend-tfl5gdluba-uc.a.run.app/userId");
-    if(response.ok){
-        const jsonResponse = await response.json();
-        return jsonResponse["userId"];
+    try{
+        const response = await fetch("https://backend-tfl5gdluba-uc.a.run.app/userId");
+        if(response.ok){
+            const jsonResponse = await response.json();
+            return jsonResponse["userId"];
+        }
+    }catch(e){
+        console.log(e);
+        displayError();
     }
 }
 async function sendResponseTime(){
-    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/responseTime?userId=${userId}&secret=${currentSecret}&time=${testResults[testResults.length -1]}`,{
-        method: "POST",
-    });
+    try{
+        const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/responseTime?userId=${userId}&secret=${currentSecret}&time=${testResults[testResults.length -1]}`,{
+            method: "POST",
+        });
+    }catch(e){
+        console.log(e);
+        displayError();
+    }
 }
 
 async function getScore(){
-    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/finalScore?userId=${userId}`);
-    let averageTime;
-    if(response.ok){
-        const jsonResponse = await response.json();
-        averageTime = jsonResponse["finalScore"];
-        leaderboardData = jsonResponse["leaderboard"];
-        updateLeaderboard();
-    }else{
-        return;
+    try{
+        const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/finalScore?userId=${userId}`);
+        let averageTime;
+        if(response.ok){
+            const jsonResponse = await response.json();
+            averageTime = jsonResponse["finalScore"];
+            leaderboardData = jsonResponse["leaderboard"];
+            updateLeaderboard();
+        }else{
+            return;
+        }
+
+        screenText.innerText += `You finished with a trimmed average time of ${averageTime.toFixed(2)} ms.\n`;
+        screenText.innerText += `Click for a new test`;
+
+        reset();
     }
-
-    screenText.innerText += `You finished with a trimmed average time of ${averageTime.toFixed(2)} ms.\n`;
-    screenText.innerText += `Click for a new test`;
-
-    reset();
+    catch(e){
+        console.log(e);
+        displayError();
+    }
 }
 
 async function getLeaderboard(){
-    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/leaderboard`);
-    if(response.ok){
-        const jsonResponse = await response.json();
-        leaderboardData = jsonResponse["leaderboard"];
-    }else{
-        return;
+    try{
+        const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/leaderboard`);
+        if(response.ok){
+            const jsonResponse = await response.json();
+            leaderboardData = jsonResponse["leaderboard"];
+        }else{
+            return;
+        }
+        updateLeaderboard();
+    }catch(e){
+        console.log(e);
+        displayError();
     }
-    updateLeaderboard();
 }
 
 function updateLeaderboard(){
     allTimeLeaderboardEntries.innerHTML = leaderboardData.map((x) => `<li>${x}</li>`).join(' ');
+}
+
+function displayError(){
+    screenText.innerText += "There was an internal server error! Please refresh and try again!";
 }
