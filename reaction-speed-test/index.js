@@ -10,12 +10,15 @@ let startTime;
 const notReadyBackground = "#be1f1a";
 const readyBackground = "#15b315";
 let currentTimeout = undefined;
+let ignoreClicks = false
 let userId = undefined;
 let currentSecret = undefined;
 let leaderboardData = [];
 
 getLeaderboard();
 document.addEventListener("mousedown", (e) => {
+    if(ignoreClicks)
+        return;
     if (currentTimeout)
         clearTimeout(currentTimeout)
 
@@ -51,6 +54,7 @@ document.addEventListener("mousedown", (e) => {
 })
 
 function reset(){
+    ignoreClicks = false;
     testResults = []
     clearTimeout(currentTimeout);
     currentTimeout = undefined;
@@ -99,6 +103,7 @@ async function sendResponseTime(){
 }
 
 async function getScore(){
+    ignoreClicks = true;
     try{
         const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/finalScore?userId=${userId}`);
         let averageTime;
