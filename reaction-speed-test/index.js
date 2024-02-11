@@ -63,19 +63,26 @@ function reset(){
 }
 
 async function getWaitime(){
-    if(!userId){
-        userId = await getUserId();
-    }
+    try{
+        if(!userId){
+            userId = await getUserId();
+        }
 
-    const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/click?userId=${userId}`);
-    if(response.ok){
-        const jsonResponse = await response.json();
-        currentTimeout = setTimeout(()=>{
-            waitingClick = true;
-            startTime = Date.now();
-            document.documentElement.style.backgroundColor = readyBackground;
-        }, parseInt(jsonResponse["waitTime"]))
-        currentSecret = jsonResponse["secret"];
+        const response = await fetch(`https://backend-tfl5gdluba-uc.a.run.app/click?userId=${userId}`);
+        if(response.ok){
+            const jsonResponse = await response.json();
+            currentTimeout = setTimeout(()=>{
+                waitingClick = true;
+                startTime = Date.now();
+                document.documentElement.style.backgroundColor = readyBackground;
+            }, parseInt(jsonResponse["waitTime"]))
+            currentSecret = jsonResponse["secret"];
+        }else{
+            throw new Error(response.status + " error");
+        }
+    }catch(e){
+        console.log(e);
+        displayError();
     }
 
 }
@@ -85,6 +92,8 @@ async function getUserId(){
         if(response.ok){
             const jsonResponse = await response.json();
             return jsonResponse["userId"];
+        }else{
+            throw new Error(response.status + " error");
         }
     }catch(e){
         console.log(e);
@@ -113,6 +122,7 @@ async function getScore(){
             leaderboardData = jsonResponse["leaderboard"];
             updateLeaderboard();
         }else{
+            throw new Error(response.status + " error");
             return;
         }
 
@@ -134,11 +144,11 @@ async function getLeaderboard(){
             const jsonResponse = await response.json();
             leaderboardData = jsonResponse["leaderboard"];
         }else{
+            throw new Error(response.status + " error");
             return;
         }
         updateLeaderboard();
     }catch(e){
-        console.log("error getting leaderboard")
         console.log(e);
         displayError();
     }
