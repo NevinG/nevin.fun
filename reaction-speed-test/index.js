@@ -138,6 +138,7 @@ async function getLeaderboard(){
         }
         updateLeaderboard();
     }catch(e){
+        console.log("error getting leaderboard")
         console.log(e);
         displayError();
     }
@@ -149,5 +150,5 @@ function updateLeaderboard(){
 
 function displayError(){
     reset();
-    screenText.innerText += "There was an internal server error! Please refresh and try again!";
+    screenText.innerText = "There was an internal server error! Please refresh and try again!";
 }
