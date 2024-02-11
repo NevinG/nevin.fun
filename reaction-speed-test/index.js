@@ -143,5 +143,6 @@ function updateLeaderboard(){
 }
 
 function displayError(){
+    reset();
     screenText.innerText += "There was an internal server error! Please refresh and try again!";
 }
