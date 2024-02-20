@@ -57,7 +57,35 @@ html, body{
     background-color: blue;
 }
 
+#user-joystick, #user2-joystick{
+    opacity: .5;
+    display: none;
+    position: absolute;
+    left:0;
+    top:0;
+    width: 10px;
+    height: 10px;
+    border:2px solid red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+#user2-joystick{
+    border: 2px solid blue;
+}
+
+#user-joystick-nub, #user2-joystick-nub{
+    position: relative;
+    width: 9px;
+    height: 9px;
+    background-color: red;
+    border-radius: 50%;
+}
+#user2-joystick-nub{
+    background-color: blue;
+}
+
 #instruction-image{
+    max-width: 100%;
     position: absolute;
     left: 50%;
     top: 50%;
