@@ -1,0 +1,48 @@
+#return-to-home{
+    font-family: monospace;
+    color: black;
+    border: none;
+    font-weight: bold;
+    font-size: 2em;
+    text-decoration: none;
+    position: fixed;
+    left: 5px;
+    top: 0;
+    user-select: none;
+    z-index: 3;
+}
+
+html, body{
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+#title{
+    text-align: center;
+}
+
+.boid{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.user, .user2{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.user2{
+    background-color: blue;
+}
+
+@media only screen and (max-width: 800pt) {
+    #return-to-home{
+        font-size: 3em;
+    }
+}
