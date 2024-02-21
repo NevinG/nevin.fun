@@ -23,7 +23,7 @@ const avoidFactor = .05; // how harsh boids move to avoid eachother
 const matchingFactor = .05; // how much boids move to align with other boids veolocities
 const centeringFactor = .0005; //how much boids move towards the center of mass of other boids
 const turnFactor = .2;
-const userTurnFactor = 200;
+const userTurnFactor = 450;
 const speedFactor = 450;
 const userSpeedFactor = 450;
 
@@ -213,6 +213,7 @@ function update(delta){
     if(user2.positionY < 0)
         user2.returnVelocityY = userTurnFactor;
 
+    console.log(user2.returnVelocityX);
     user.positionX += user.velocityX * userSpeedFactor * delta;
     user.positionY += user.velocityY * userSpeedFactor * delta;
     if(!userIsBeingControlled)
@@ -352,7 +353,7 @@ function startGame(){
             img.src = imgSrc;
         }
     }
-    screen.orientation.addEventListener("change", checkForRotation);
+    document.addEventListener("orientationChange", checkForRotation);
     checkForRotation();
 
     document.body.appendChild(img);
@@ -360,7 +361,7 @@ function startGame(){
 
     //starts game on click
     document.addEventListener("click", (e) => {
-        screen.orientation.removeEventListener("change", checkForRotation);
+        screen.orientation.removeEventListener("orientationChange", checkForRotation);
         document.body.removeChild(img);
         resetGame();
         addEventListeners();
