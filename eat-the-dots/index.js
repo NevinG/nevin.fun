@@ -353,7 +353,6 @@ function startGame(){
         }else{
             img.src = imgSrc;
         }
-        alert(`${window.innerHeight} ${window.innerWidth} ${img.src}`);
     }
     window.addEventListener("resize", checkForRotation);
     checkForRotation();
