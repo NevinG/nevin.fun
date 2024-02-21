@@ -215,15 +215,17 @@ function update(delta){
 
     user.positionX += user.velocityX * userSpeedFactor * delta;
     user.positionY += user.velocityY * userSpeedFactor * delta;
-    if(!userIsBeingControlled)
+    if(!userIsBeingControlled){
         user.positionX += user.returnVelocityX * delta;
         user.positionY += user.returnVelocityY * delta;
+    }
 
     user2.positionX += user2.velocityX * userSpeedFactor * delta;
     user2.positionY += user2.velocityY * userSpeedFactor * delta;
-    if(!user2IsBeingControlled)
+    if(!user2IsBeingControlled){
         user2.positionX += user2.returnVelocityX * delta;
         user2.positionY += user2.returnVelocityY * delta;
+    }
     
     //update boid positions in the div
     updateBoidDivPositions();
@@ -346,12 +348,12 @@ function startGame(){
 
     //check for rotation
     const checkForRotation = () => {
-        if (screen.height > screen.width){
+        if (window.innerHeight > window.innerWidth){
             img.src = "rotate.png";
         }else{
             img.src = imgSrc;
         }
-        alert(`${screen.height} ${screen.width} ${img.src}`);
+        alert(`${window.innerHeight} ${window.innerWidth} ${img.src}`);
     }
     window.addEventListener("resize", checkForRotation);
     checkForRotation();
