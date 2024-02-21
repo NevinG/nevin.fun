@@ -213,7 +213,6 @@ function update(delta){
     if(user2.positionY < 0)
         user2.returnVelocityY = userTurnFactor;
 
-    console.log(user2.returnVelocityX);
     user.positionX += user.velocityX * userSpeedFactor * delta;
     user.positionY += user.velocityY * userSpeedFactor * delta;
     if(!userIsBeingControlled)
@@ -353,7 +352,7 @@ function startGame(){
             img.src = imgSrc;
         }
     }
-    document.addEventListener("orientationChange", checkForRotation);
+    window.addEventListener("resize", checkForRotation);
     checkForRotation();
 
     document.body.appendChild(img);
@@ -361,7 +360,7 @@ function startGame(){
 
     //starts game on click
     document.addEventListener("click", (e) => {
-        screen.orientation.removeEventListener("orientationChange", checkForRotation);
+        window.removeEventListener("resize", checkForRotation);
         document.body.removeChild(img);
         resetGame();
         addEventListeners();
