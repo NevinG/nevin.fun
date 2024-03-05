@@ -158,7 +158,7 @@ function update(delta){
 
     //check if player lose
     if(player.y <= endHeight){
-        location.reload();
+        location.reload(true);
     }
         
 }
