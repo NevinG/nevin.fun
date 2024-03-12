@@ -27,7 +27,7 @@ html, body{
     margin: 0;
     position: absolute;
     left: 50%;
-    top: 0%;
+    top: 36px;
     transform: translate(-50%, 0);
     text-align: center;
 }
