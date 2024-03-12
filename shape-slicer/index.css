@@ -1,0 +1,42 @@
+#return-to-home{
+    font-family: monospace;
+    color: black;
+    border: none;
+    font-weight: bold;
+    font-size: 2em;
+    text-decoration: none;
+    position: fixed;
+    left: 5px;
+    top: 0;
+    user-select: none;
+    z-index: 3;
+}
+
+html, body{
+    overflow: hidden;
+    overscroll-behavior: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    touch-action: none;
+}
+
+#scores{
+    user-select: none;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0);
+    text-align: center;
+}
+
+#instruction-image{
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
